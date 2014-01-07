@@ -4,3 +4,6 @@
 [submodule "host"]
 	path = host
 	url = https://github.com/flynn/lorne
+[submodule "cli"]
+	path = cli
+	url = https://github.com/flynn/grid-cli
