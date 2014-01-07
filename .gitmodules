@@ -1,0 +1,6 @@
+[submodule "sched"]
+	path = sched
+	url = https://github.com/flynn/sampi
+[submodule "host"]
+	path = host
+	url = https://github.com/flynn/lorne
