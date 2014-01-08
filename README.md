@@ -6,7 +6,7 @@ The Grid is a distributed, container-based Unix process scheduling framework and
 
 ## Development
 
-Get the project and it's sub repos:
+Get the project and its sub repos:
 
 	$ git clone https://github.com/flynn/flynn-grid
 	$ cd flynn-grid
