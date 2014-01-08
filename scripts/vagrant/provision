@@ -2,7 +2,8 @@
 
 cat <<EOF > /home/vagrant/.bashrc
 export GOPATH=/vagrant/.go
-export PATH=/vagrant/.go/bin:/vagrant/scripts/vagrant:$PATH
+export GOBIN=/vagrant/.go/bin
+export PATH=/vagrant/scripts/vagrant:$GOBIN:$PATH
 cd /vagrant
 EOF
 chown vagrant /home/vagrant/.bashrc
