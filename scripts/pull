@@ -1,0 +1,12 @@
+#!/bin/sh
+cd $(dirname $0)/..
+for gitdir in $(find . -name ".git"); do
+	path=$(dirname $gitdir)
+	cd $path && git pull --rebase origin master
+done
+for subrepo in $(find . -name ".subrepo"); do
+	path=$(dirname $subrepo)
+	repo=$(cat $subrepo)
+	rm -rf $subrepo
+	git clone $repo $path
+done
