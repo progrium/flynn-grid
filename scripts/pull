@@ -1,4 +1,8 @@
 #!/bin/sh
+# 
+# This script does a rebase pull on this repo and sub repos.
+# It will also clone sub repos that have not been cloned yet.
+#
 cd $(dirname $0)/..
 for gitdir in $(find . -name ".git"); do
 	path=$(dirname $gitdir)
