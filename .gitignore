@@ -1,4 +1,5 @@
 .vagrant
+.go
 cli
 host
 sched
