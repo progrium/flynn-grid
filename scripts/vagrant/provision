@@ -1,0 +1,15 @@
+#!/bin/sh
+
+cat <<EOF > /home/vagrant/.bashrc
+export GOPATH=/home/vagrant/.go
+export PATH=/home/vagrant/.go/bin:/vagrant/scripts/vagrant:$PATH
+cd /vagrant
+EOF
+chown vagrant /home/vagrant/.bashrc
+
+cd /usr/bin
+if [ ! -f godeb ]; then
+	wget -q j.mp/godeb
+	tar -zxf godeb
+fi
+./godeb install 1.2

@@ -7,9 +7,7 @@ Vagrant.configure("2") do |config|
   config.vm.box_download_checksum = "d222d515e83e0d8a547c55f9e5cbaec703fd414f0d761193d9fee1c6066504cf"
   config.vm.box_download_checksum_type = "sha256"
 
-  config.vm.provision :shell, inline: <<-SCRIPT
-    sudo -u vagrant sh -c "echo 'export GOPATH=/home/vagrant/.go' >> /home/vagrant/.bashrc"
-    sudo -u vagrant sh -c "echo 'PATH=/home/vagrant/.go/bin:/vagrant/scripts/vagrant:$PATH' >> /home/vagrant/.bashrc"
-    sudo -u vagrant sh -c "echo 'cd /vagrant' >> /home/vagrant/.bashrc"
-  SCRIPT
+  config.vm.provision :shell, path: "./scripts/vagrant/provision"
+  config.vm.provision :shell, privileged: false, inline: "go get github.com/kr/godep"
+  config.vm.provision :shell, path: "./scripts/vagrant/update-docker"
 end
