@@ -3,6 +3,8 @@
 # This script runs `make build` on anything in the project
 # that has a Makefile with a build target defined. 
 #
+# Then it runs `make install` on projects that implement it.
+#
 # Then it runs `docker build` on anything in the project with
 # Dockerfile, using the directory as the image name using the
 # flynn namespace. (ie: flynn/etcd)
@@ -13,6 +15,12 @@ for makefile in $(grep -lrI --exclude-dir=.go build: . | grep Makefile); do
 	path=$(dirname $makefile)
 	echo "\033[32m Building $(basename $path)... \033[39m"
 	cd $path && make build
+	cd - > /dev/null
+done
+for makefile in $(grep -lrI --exclude-dir=.go install: . | grep Makefile); do
+	path=$(dirname $makefile)
+	echo "\033[32m Installing $(basename $path)... \033[39m"
+	cd $path && make install
 	cd - > /dev/null
 done
 for dockerfile in $(find . -not -path "\./\.*" -name "Dockerfile"); do

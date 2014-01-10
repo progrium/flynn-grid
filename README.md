@@ -6,6 +6,8 @@ The Grid is a distributed, container-based Unix process scheduling framework and
 
 ## Development
 
+### Setting up development VM
+
 Get the project and its sub repos:
 
 	$ git clone https://github.com/flynn/flynn-grid
@@ -23,6 +25,18 @@ This will provision a development VM. You can SSH in:
 Now build the entire project from inside the VM:
 
 	$ build-all
+
+### See it working
+
+The VM acts mostly like a target host, except it has all the development tooling and source ready to play with. In order to start a host as you would a cluster node, for now run:
+
+	$ start-host
+
+This runs the host service (aka lorne), which will bootstrap all the other services needed to be running on a host. These are all run in Docker containers, so you can manage/debug them using Docker commands if you wish.
+
+You can also use the grid CLI tool that was built to work with this one node cluster:
+
+	$ grid jobs
 
 ## License
 
