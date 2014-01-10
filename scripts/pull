@@ -5,15 +5,17 @@
 #
 set -e
 cd $(dirname $0)/..
-for gitdir in $(find . -not -path "\./\.*" -name ".git"); do
+for gitdir in $(find . -not -path "\./\.go*" -name ".git"); do
 	path=$(dirname $gitdir)
+	echo "\033[32mFound repo at $path ... \033[39m"
 	cd $path
 	[ ! -z $(git config --get remote.origin.url) ] && git pull --rebase origin master
-	cd -
+	cd - > /dev/null
 done
-for subrepo in $(find . -not -path "\./\.*" -name ".subrepo"); do
+for subrepo in $(find . -not -path "\./\.go*" -name ".subrepo"); do
 	path=$(dirname $subrepo)
 	if [ ! -d "$path/.git" ]; then
+		echo "\033[32mCloning subrepo at $path ... \033[39m"
 		repo=$(cat $subrepo)
 		rm -rf $subrepo
 		git clone $repo $path
