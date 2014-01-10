@@ -5,12 +5,13 @@
 #
 set -e
 cd $(dirname $0)/..
-for gitdir in $(find . -name ".git"); do
+for gitdir in $(find . -not -path "\./\.*" -name ".git"); do
 	path=$(dirname $gitdir)
-	cd $path && git pull --rebase origin master
+	cd $path
+	[ ! -z $(git config --get remote.origin.url) ] && git pull --rebase origin master
 	cd -
 done
-for subrepo in $(find . -name ".subrepo"); do
+for subrepo in $(find . -not -path "\./\.*" -name ".subrepo"); do
 	path=$(dirname $subrepo)
 	if [ ! -d "$path/.git" ]; then
 		repo=$(cat $subrepo)
