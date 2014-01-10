@@ -5,15 +5,17 @@
 # origin URL.
 #
 set -e
-cd $(dirname $0)/..
+cd $(dirname $0)/../..
 workspace=$(pwd)/.go
-for gitdir in $(find . -not -path "\./\.*" -name ".git"); do
+for gitdir in $(find . -not -path "\./\.go*" -name ".git"); do
 	path=$(dirname $gitdir)
 	cd $path
 	package=$(git config --get remote.origin.url | sed 's/http[s]:\/\///')
-	echo $package
-	mkdir -p $workspace/src/$(dirname $package)
-	rm -f $workspace/src/$package
-	ln -s $(pwd) $workspace/src/$package
+	if [ ! -z "$package" ]; then
+		echo $package
+		mkdir -p $workspace/src/$(dirname $package)
+		rm -f $workspace/src/$package
+		ln -s $(pwd) $workspace/src/$package
+	fi
 	cd - > /dev/null
 done

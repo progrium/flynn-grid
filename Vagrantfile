@@ -9,6 +9,6 @@ Vagrant.configure("2") do |config|
 
   config.vm.provision :shell, path: "./scripts/vagrant/provision"
   config.vm.provision :shell, privileged: false, inline: "go get github.com/kr/godep"
-  config.vm.provision :shell, privileged: false, inline: "./scripts/vagrant/sync-go-workspace"
+  config.vm.provision :shell, privileged: false, inline: "./scripts/vagrant/sync-go"
   config.vm.provision :shell, path: "./scripts/vagrant/update-docker"
 end
