@@ -19,5 +19,6 @@ for subrepo in $(find . -not -path "\./\.go*" -name ".subrepo"); do
 		repo=$(cat $subrepo)
 		rm -rf $subrepo
 		git clone $repo $path
+		echo "$repo" > $subrepo
 	fi
 done
