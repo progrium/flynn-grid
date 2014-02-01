@@ -1,12 +1,13 @@
 #!/bin/sh
 
 cat <<EOF > /home/vagrant/.bashrc
-export GOPATH=/vagrant/.go
+export GOPATH=/vagrant/.go:/vagrant/workspace
 export GOBIN=/vagrant/.go/bin
-export PATH=/vagrant/scripts/vagrant:/vagrant/.go/bin:$PATH
+export PATH=/vagrant/scripts:/vagrant/scripts/vagrant:/vagrant/.go/bin:$PATH
 cd /vagrant
 EOF
 chown vagrant /home/vagrant/.bashrc
+. /home/vagrant/.bashrc
 
 cd /usr/bin
 if [ ! -f godeb ]; then
@@ -14,3 +15,11 @@ if [ ! -f godeb ]; then
 	tar -zxf godeb
 fi
 ./godeb install 1.2
+
+
+cat <<EOF | su -l vagrant
+	go get github.com/kr/godep
+	pull
+EOF
+
+update-docker

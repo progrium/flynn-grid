@@ -1,7 +1,8 @@
 .vagrant
 .go
-cli
-host
-sched
-external/discoverd
+workspace/bin
+workspace/pkg
+workspace/src/github.com/flynn/flynn-host
+workspace/src/github.com/flynn/discoverd
+workspace/src/github.com/flynn/grid-cli
 vendor

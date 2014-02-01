@@ -11,13 +11,13 @@
 #
 set -e
 cd $(dirname $0)/../..
-for makefile in $(grep -lrI --exclude-dir=.go build: . | grep Makefile); do
+for makefile in $(find . -not -path "\./\.*" -name "Makefile" -exec grep "build:" {} \; -print | grep Makefile); do
 	path=$(dirname $makefile)
 	echo "\033[32mBuilding $(basename $path)... \033[39m"
 	cd $path && make build
 	cd - > /dev/null
 done
-for makefile in $(grep -lrI --exclude-dir=.go install: . | grep Makefile); do
+for makefile in $(find . -not -path "\./\.*" -name "Makefile" -exec grep "install:" {} \; -print | grep Makefile); do
 	path=$(dirname $makefile)
 	echo "\033[32mInstalling $(basename $path)... \033[39m"
 	cd $path && make install
