@@ -1,0 +1,20 @@
+#!/bin/bash
+# 
+# This script finds subrepos and collapses them back to empty stubs
+#
+set -e
+cd $(dirname $0)/..
+read -p "Are you sure? This will destroy any uncommitted/pushed changes in those repos. [yN] " -n 1 -r
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    for subrepo in $(find . -not -path "\./\.go*" -name ".subrepo"); do
+		path=$(dirname $subrepo)
+		if [ -d "$path/.git" ]; then
+			echo -e "\033[33mResetting subrepo at $path ... \033[39m"
+			repo=$(cat $subrepo)
+			rm -rf $path
+			mkdir -p $path
+			echo "$repo" > $subrepo
+		fi
+	done
+fi
