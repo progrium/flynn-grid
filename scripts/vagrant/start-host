@@ -3,4 +3,4 @@
 # [ -z $(docker ps -q) ] || docker ps -q | xargs docker kill
 
 ip=$(ifconfig eth0 | grep "inet addr" | awk -F: '{print $2}' | awk '{print $1}')
-docker run -v /var/run/docker.sock:/var/run/docker.sock -p 1113:1113 flynn/host -external $ip
+docker run -v /var/run/docker.sock:/var/run/docker.sock -p 1113:1113 flynn/flynn-host -external $ip
