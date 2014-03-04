@@ -14,7 +14,7 @@ if [ ! -f godeb ]; then
 	wget -q j.mp/godeb
 	tar -zxf godeb
 fi
-./godeb install 1.2
+./godeb install
 
 
 cat <<EOF | su -l vagrant
